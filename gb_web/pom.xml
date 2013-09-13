@@ -47,6 +47,12 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.sap.ui5</groupId>
+			<artifactId>mobile</artifactId>
+			<version>${sap.cloud.ui5.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.2.2</version>

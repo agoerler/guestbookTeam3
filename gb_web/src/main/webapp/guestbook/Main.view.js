@@ -5,8 +5,11 @@ sap.ui.jsview("guestbook.Main", {
 	},
 
 	createContent : function(oController) {
-		return new sap.ui.commons.TextView({
-			text : "MainView"
+		return new sap.m.Page({
+			title : "Title",
+			content : [
+
+			]
 		});
 	}
 
