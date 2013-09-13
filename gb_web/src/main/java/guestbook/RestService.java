@@ -1,6 +1,10 @@
 package guestbook;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -28,7 +32,14 @@ public class RestService {
 	@Path("/entries")
 	public String getEntries() {
 		Gson gson = new Gson();
-		String json = gson.toJson(getEntryDAO().getEntries());
+		List<Entry> entries = new ArrayList<Entry>(getEntryDAO().getEntries());
+		Collections.sort(entries, new Comparator<Entry>(){
+			@Override
+			public int compare(Entry o1, Entry o2) {				
+				return o1.getDate().before(o2.getDate()) ? 1 : -1;
+			}			
+		});
+		String json = gson.toJson(entries);		
 		return json;
 	}
 

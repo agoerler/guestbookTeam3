@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -83,5 +84,46 @@ public class RestServiceJsonTest {
 		
 		String json = classUnderTest.getEntries();
 		assertEquals("[{\"name\":\"hugo\",\"text\":\"huhu\",\"date\":\"Jan 1, 1970 1:00:00 AM\"}]", json);
+	}
+	
+	@Test
+	public void testSort(){
+final EntryDAO stub = new EntryDAO() {
+			
+			@Override
+			public List<Entry> getEntries() {
+				List<Entry> list = new ArrayList<Entry>();
+				
+				Entry entry = new Entry();
+				entry.setName("hugo");
+				entry.setText("huhu");
+				entry.setDate(new Date(0));				
+				list.add(entry);
+				
+				entry = new Entry();
+				entry.setName("john");
+				entry.setText("hello");
+				entry.setDate(new Date(1000));				
+				list.add(entry);
+				return list;
+			}
+			
+			@Override
+			public void addEntry(Entry entry) {
+				throw new AssertionError("unexpected call");
+			}
+		};
+		
+		RestService classUnderTest = new RestService() {
+
+			@Override
+			EntryDAO getEntryDAO() {
+				return stub;
+			}
+			
+		};
+		
+		String json = classUnderTest.getEntries();
+		assertEquals("[{\"name\":\"john\",\"text\":\"hello\",\"date\":\"Jan 1, 1970 1:00:01 AM\"},{\"name\":\"hugo\",\"text\":\"huhu\",\"date\":\"Jan 1, 1970 1:00:00 AM\"}]", json);
 	}
 }
