@@ -28,5 +28,9 @@
 		<servlet-name>CXFNonSpringJaxrsServlet</servlet-name>
 		<url-pattern>/backend/*</url-pattern>
 	</servlet-mapping>
+	<resource-ref>
+		<res-ref-name>jdbc/DefaultDB</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+	</resource-ref>
 
 </web-app>
