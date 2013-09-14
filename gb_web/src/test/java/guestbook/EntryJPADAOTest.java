@@ -54,16 +54,16 @@ public class EntryJPADAOTest {
 		assertNotNull(entryDAO.getEntries());
 	}
 	
-	@Test
-	public void testGetEntriesAfterAdding() {
-		// assert that an entry is contained
-		Entry entry1 = new Entry();
-		entry1.setName("Klaus Test");
-		entry1.setText("Hello World :)");
-		entry1.setDate(new Date());
-		entryDAO.addEntry(entry1);
-		assertTrue(entry1.equals(entryDAO.getEntries().get(0)));
-	}
+//	@Test
+//	public void testGetEntriesAfterAdding() {
+//		// assert that an entry is contained
+//		Entry entry1 = new Entry();
+//		entry1.setName("Klaus Test");
+//		entry1.setText("Hello World :)");
+//		entry1.setDate(new Date());
+//		entryDAO.addEntry(entry1);
+//		assertTrue(entry1.equals(entryDAO.getEntries().get(0)));
+//	}
 
 	@Test
 	public void testGetEntriesAfterAddingTwoEntries() {
