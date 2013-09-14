@@ -34,5 +34,4 @@ describe("the view", function() {
 		expect(item.getTitle()).toBe("Name Entry");
 		expect(item.getDescription()).toBe("Sep 14, 2013 9:03:24 AM");
 	});
-
 });

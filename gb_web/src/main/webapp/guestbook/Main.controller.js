@@ -12,14 +12,24 @@ sap.ui.controller("guestbook.Main",
 				var list = this.getView().byId("EntryList");
 				list.bindItems("/", new sap.m.StandardListItem({
 					title : "{name}",
-					description: "{date}"
-					
+					description : "{date}",
+					type : sap.m.ListType.Active,
+					press : this.onItemPressed
 				}));
 
 				var model = new sap.ui.model.json.JSONModel(
 						"backend/guestbook/entries");
 				sap.ui.getCore().setModel(model);
 			},
+
+			onItemPressed : function(event) {
+				var path = event.getSource().getBindingContext().sPath;
+
+				var detailPage = app.getPage("DetailView");
+				detailPage.bindElement(path);
+				app.to(detailPage);
+			},
+
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the
 		 * controller's View is re-rendered (NOT before the first rendering!
