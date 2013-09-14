@@ -6,10 +6,11 @@ sap.ui.jsview("guestbook.Main", {
 
 	createContent : function(oController) {
 		return new sap.m.Page({
-			title : "Title",
-			content : [
-
-			]
+			title : "Guestbook",
+			content : [ new sap.m.List({
+				id : oController.createId("EntryList"),
+				
+			}) ]
 		});
 	}
 

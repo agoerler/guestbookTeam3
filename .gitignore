@@ -5,3 +5,5 @@ target/
 *.log
 */src/main/webapp/WEB-INF/lib/
 */bin
+gb_web/WebContent/META-INF/MANIFEST.MF
+gb_web/WebContent/WEB-INF/web.xml

@@ -9,7 +9,7 @@
   $cssDependencies$
   $javascriptDependencies$
   <script type="text/javascript" src="target/js-unit-tests-dependencies/META-INF/resources/sap-ui-core.js"
-   id="sap-ui-bootstrap" data-sap-ui-libs="sap.ui.commons">
+   id="sap-ui-bootstrap" data-sap-ui-libs="sap.m">
   </script>
   <script type="text/javascript">
     jQuery.sap.registerModulePath("guestbook", "/src/main/webapp/guestbook");
