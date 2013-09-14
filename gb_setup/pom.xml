@@ -52,6 +52,21 @@
 						</configuration>
 					</execution>
 					<execution>
+						<id>install_mobile</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<file>${eclipse.path}/plugins/com.sap.ui5.mobile_${sap.cloud.ui5.version}.jar</file>
+							<groupId>com.sap.ui5</groupId>
+							<artifactId>mobile</artifactId>
+							<version>${sap.cloud.ui5.version}</version>
+							<scope>system</scope>
+							<packaging>jar</packaging>
+						</configuration>
+					</execution>
+					<execution>
 						<id>install_core</id>
 						<phase>initialize</phase>
 						<goals>
