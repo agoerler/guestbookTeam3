@@ -20,16 +20,14 @@ import org.junit.Test;
 public class EntryJPADAOTest {
 
 	EntryDAOProvider provider;
-	EntryJPADAO entryJPADAO;
+	EntryDAO entryDAO;
 	
 	@Before
 	public void setUp() throws Exception {
 	
-//		provider = new EntryDAOProvider();
-//		provider.setDefaultClass("guestbook.EntryJPADAO");
-//		entryJPADAO = (EntryJPADAO) provider.getContext(EntryJPADAO.class); 
-		entryJPADAO = new EntryJPADAO(getInMemoryDataSource());
-		assertNotNull(entryJPADAO);
+		provider = new EntryDAOProvider(new EntryJPADAO(getInMemoryDataSource()));
+		entryDAO = provider.getContext(EntryJPADAO.class);
+		assertNotNull(entryDAO);
 	}
 
 	/**
@@ -53,7 +51,7 @@ public class EntryJPADAOTest {
 	@Test
 	public void testGetEntriesEmptyList() {
 		// assert that by default is not null
-		assertNotNull(entryJPADAO.getEntries());
+		assertNotNull(entryDAO.getEntries());
 	}
 	
 	@Test
@@ -63,8 +61,8 @@ public class EntryJPADAOTest {
 		entry1.setName("Klaus Test");
 		entry1.setText("Hello World :)");
 		entry1.setDate(new Date());
-		entryJPADAO.addEntry(entry1);
-		assertTrue(entry1.equals(entryJPADAO.getEntries().get(0)));
+		entryDAO.addEntry(entry1);
+		assertTrue(entry1.equals(entryDAO.getEntries().get(0)));
 	}
 
 	@Test
@@ -84,11 +82,11 @@ public class EntryJPADAOTest {
 		testList.add(entry1);
 		testList.add(entry2);
 		
-		entryJPADAO.addEntry(entry1);
-		entryJPADAO.addEntry(entry2);
+		entryDAO.addEntry(entry1);
+		entryDAO.addEntry(entry2);
 		
 		//Makes sure that every entry is in the result list
-		for(Entry persistenceEntry : entryJPADAO.getEntries()) {
+		for(Entry persistenceEntry : entryDAO.getEntries()) {
 			boolean hasPair = false;
 			
 			testEntryLoop : for(Entry testEntry : testList) {
