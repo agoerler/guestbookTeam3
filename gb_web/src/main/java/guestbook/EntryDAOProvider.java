@@ -15,7 +15,8 @@ public class EntryDAOProvider implements ContextResolver<EntryDAO> {
 		this.instance = instance;
 	}
 
-	public void setDefaultClass(String defaultClassName) throws Exception {
+	public void setDefaultClass(String defaultClassName) 
+	throws RuntimeException, NullPointerException, ClassNotFoundException,  InstantiationException, IllegalAccessException {
 		Class<?> defaultClass = Class.forName(defaultClassName);
 		instance = (EntryDAO) defaultClass.newInstance();
 	}
