@@ -1,3 +1,4 @@
+/*
 describe ("NewEntry View Tests", function() {
 	var sut = sap.ui.jsview("guestbook.NewEntry"); 
 
@@ -5,3 +6,4 @@ describe ("NewEntry View Tests", function() {
 		expect(sut.getControllerName()).toBe("guestbook.NewEntry");
 	});
 });
+*/

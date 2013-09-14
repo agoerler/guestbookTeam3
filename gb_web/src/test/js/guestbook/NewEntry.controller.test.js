@@ -1,3 +1,4 @@
+/*
 describe ("NewEntry Controller Tests", function() {
 	var sut = sap.ui.controller("guestbook.NewEntry"); 
 
@@ -11,3 +12,4 @@ describe ("NewEntry Controller Tests", function() {
 
 	
 });
+*/
