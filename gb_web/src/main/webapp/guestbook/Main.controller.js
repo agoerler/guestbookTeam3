@@ -30,6 +30,10 @@ sap.ui.controller("guestbook.Main",
 				app.to(detailPage);
 			},
 
+			onCreateNew : function(event) {
+				app.to("CreateView");
+			},
+
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the
 		 * controller's View is re-rendered (NOT before the first rendering!

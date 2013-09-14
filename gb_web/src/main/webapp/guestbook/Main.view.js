@@ -9,7 +9,11 @@ sap.ui.jsview("guestbook.Main", {
 			title : "Guestbook",
 			content : [ new sap.m.List({
 				id : oController.createId("EntryList"),
-				
+
+			}) ],
+			headerContent : [ new sap.m.Button({
+				press : [ oController.onCreateNew, oController ],
+				text : "create new entry"
 			}) ]
 		});
 	}
