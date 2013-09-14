@@ -30,9 +30,13 @@ public class RestService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/entries")
+	/**
+	 * 	 * @return JSON string representing list of entries sorted by <code>Date</code> field starting from the most recent.
+	 */
 	public String getEntries() {
 		Gson gson = new Gson();
-		List<Entry> entries = new ArrayList<Entry>(getEntryDAO().getEntries());
+		List<Entry> entries = getEntryDAO().getEntries(); // Get entries from DAO
+		entries = new ArrayList<Entry>(entries); // Need mutable list to sort
 		Collections.sort(entries, new Comparator<Entry>(){
 			@Override
 			public int compare(Entry o1, Entry o2) {				
@@ -42,10 +46,12 @@ public class RestService {
 		String json = gson.toJson(entries);		
 		return json;
 	}
-
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/entries")
+	/**
+	 * 	 Adds new entry to the list
+	 */
 	public void postEntry(String json) {
 		Gson gson = new Gson();
 		Entry entry = gson.fromJson(json, Entry.class);
