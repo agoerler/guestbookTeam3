@@ -12,6 +12,11 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 
+ * @author tendlich, pakunz
+ *
+ */
 public class EntryJPADAOTest {
 
 	EntryDAOProvider provider;

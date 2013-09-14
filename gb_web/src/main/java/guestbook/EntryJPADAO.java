@@ -36,7 +36,7 @@ public class EntryJPADAO implements EntryDAO {
 	public EntryJPADAO() throws RuntimeException, NullPointerException {
 
 		DataSource ds = obtainDataSource();
-		setup(ds);
+		createEmf(ds);
 	}
 	
 	/**
@@ -44,19 +44,12 @@ public class EntryJPADAO implements EntryDAO {
 	 * @param DataSource The data source to connect to
 	 */
 	public EntryJPADAO(DataSource ds) throws NullPointerException {
-		setup(ds);
+		createEmf(ds);
 	}
 	
-	private void setup(DataSource ds) throws NullPointerException
-	{
-		Map<String, DataSource> properties = new HashMap<String, DataSource>();
-		properties.put(PersistenceUnitProperties.NON_JTA_DATASOURCE, ds);
-		emf = Persistence.createEntityManagerFactory("guestbookTeam3", properties);
-		if(emf == null) {
-			throw new NullPointerException("could not create Entity Manager Factory");
-		}
-	}
-	
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Entry> getEntries() {
 		EntityManager em = emf.createEntityManager();
@@ -66,6 +59,9 @@ public class EntryJPADAO implements EntryDAO {
 		return returnList;
 	}
 
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void addEntry(Entry entry) {
 		EntityManager em = emf.createEntityManager();
@@ -75,9 +71,35 @@ public class EntryJPADAO implements EntryDAO {
 		em.close();
 	}
 	
+	/**
+	 * Internal helper method, executes the necessary steps to create an Entity Manager Factory
+	 * 
+	 * @param DataSource The data source to create persistence managers for
+	 * @throws NullPointerException If EMF could not be created
+	 */
+	private void createEmf(DataSource ds) throws NullPointerException
+	{
+		Map<String, DataSource> properties = new HashMap<String, DataSource>();
+		properties.put(PersistenceUnitProperties.NON_JTA_DATASOURCE, ds);
+		emf = Persistence.createEntityManagerFactory("guestbookTeam3", properties);
+		if(emf == null) {
+			throw new NullPointerException("could not create Entity Manager Factory");
+		}
+	}
+	
+	/**
+	 * Internal method in order to create a DataSource object for the Entity Manager Factory
+	 * 
+	 * First, an InitialContext is created using the current environmental parameters.
+	 * Second, the context is leveraged to perform a lookup using the default lookupString
+	 * 
+	 * @return The data source that can be found executing the default context lookup
+	 * @throws RuntimeException If the context lookup fails
+	 */
 	private DataSource obtainDataSource() throws RuntimeException {
 		InitialContext ctx;
 		try {
+			//Note: does not work locally, for local testing create an in-memory derby data base and use that data source
 			ctx = new InitialContext();
 			return (DataSource) ctx.lookup(lookupString);
 		} catch (NamingException e) {
